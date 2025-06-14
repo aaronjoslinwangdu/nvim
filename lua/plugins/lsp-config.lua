@@ -5,9 +5,13 @@ return {
     version = "1.11.0",
     opts = {
       ensure_installed = {
+        "vimls",
+        "lua_ls",
         "basedpyright",
-        "debugpy",
         "ruff",
+        "ts_ls",
+        "html",
+        "cssls",
       },
       automatic_installation = true,
     },
@@ -30,6 +34,7 @@ return {
           "eslint",
           "astro",
           "cssls",
+          "ruff",
         },
         automatic_installation = true,
       })
@@ -51,37 +56,12 @@ return {
         ["astro"] = false,
       }
 
-      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-      local lsp_formatting = function(bufnr)
-        vim.lsp.buf.format({
-          bufnr = bufnr,
-          filter = function(client)
-            return servers_filters[client.name]
-          end,
-        })
-      end
-
-      local on_attach = function(client, bufnr)
-        -- if client.supports_method("textDocument/formatting") then
-        -- 	vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        -- 	vim.api.nvim_create_autocmd("BufWritePre", {
-        -- 		group = augroup,
-        -- 		buffer = bufnr,
-        -- 		callback = function()
-        -- 			lsp_formatting(bufnr)
-        -- 		end,
-        -- 	})
-        -- end
-      end
-
       local handlers = {
         ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
         ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
       }
 
       lspconfig.lua_ls.setup({
-        on_attach = on_attach,
         capabilities = capabilities,
         handlers = handlers,
         settings = {
@@ -96,45 +76,59 @@ return {
       })
 
       lspconfig.basedpyright.setup({
-        on_attach = on_attach,
         capabilities = capabilities,
         handlers = handlers,
+        settings = {
+          pyright = {
+            disableOrganizeImports = true,
+          },
+          python = {
+            analysis = {
+              ignore = { "*" },
+            },
+          },
+        },
       })
 
       lspconfig.html.setup({
-        on_attach = on_attach,
         capabilities = capabilities,
         handlers = handlers,
       })
 
       lspconfig.cssls.setup({
-        on_attach = on_attach,
         capabilities = capabilities,
         handlers = handlers,
       })
 
       lspconfig.astro.setup({
-        on_attach = on_attach,
         capabilities = capabilities,
         handlers = handlers,
       })
 
       lspconfig.eslint.setup({
-        on_attach = on_attach,
         capabilities = capabilities,
         handlers = handlers,
       })
 
       lspconfig.ts_ls.setup({
-        on_attach = on_attach,
         capabilities = capabilities,
         handlers = handlers,
       })
 
       lspconfig.vimls.setup({
-        on_attach = on_attach,
         capabilities = capabilities,
         handlers = handlers,
+      })
+
+      lspconfig.ruff.setup({
+        capabilities = capabilities,
+        handlers = handlers,
+        on_attach = function(client, bufnr)
+          if client.name == "ruff" then
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+          end
+        end,
       })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
