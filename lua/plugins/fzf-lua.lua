@@ -4,8 +4,8 @@ return {
 	config = function()
 		require("fzf-lua").setup({
 			oldfiles = {
-				cwd_only = true,
 				include_current_session = true,
+				cwd_only = true,
 			},
 			grep = {
 				rg_glob = true,
