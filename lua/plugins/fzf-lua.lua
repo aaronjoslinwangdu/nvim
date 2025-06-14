@@ -13,7 +13,7 @@ return {
 			},
 			previewers = {
 				builtin = {
-					syntax_limit_b = 1024 * 100, -- 100KB
+					syntax_limit_b = 1024 * 100,
 				},
 			},
 		})
