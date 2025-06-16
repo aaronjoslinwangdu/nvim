@@ -21,12 +21,12 @@ return {
 		-- use for code actions
 		require("fzf-lua").register_ui_select()
 
-		vim.api.nvim_set_keymap("n", "<leader>sf", [[<Cmd>lua require"fzf-lua".files()<CR>]], {})
-		vim.api.nvim_set_keymap("n", "<leader>sr", [[<Cmd>lua require"fzf-lua".oldfiles()<CR>]], {})
-		vim.api.nvim_set_keymap("n", "<leader>sb", [[<Cmd>lua require"fzf-lua".buffers()<CR>]], {})
-		vim.api.nvim_set_keymap("n", "<leader>sg", [[<Cmd>lua require"fzf-lua".grep()<CR>]], {})
-		vim.api.nvim_set_keymap("n", "<leader>ca", [[<Cmd>lua require"fzf-lua".lsp_code_actions()<CR>]], {})
-		vim.api.nvim_set_keymap("n", "fu", [[<Cmd>lua require"fzf-lua".lsp_references()<CR>]], {})
-		vim.api.nvim_set_keymap("n", "gd", [[<Cmd>lua require"fzf-lua".lsp_definitions()<CR>]], {})
+		vim.api.nvim_set_keymap("n", "<leader>sf", ":lua require'fzf-lua'.files()<CR>", {})
+		vim.api.nvim_set_keymap("n", "<leader>sr", ":lua require'fzf-lua'.oldfiles()<CR>", {})
+		vim.api.nvim_set_keymap("n", "<leader>sb", ":lua require'fzf-lua'.buffers()<CR>", {})
+		vim.api.nvim_set_keymap("n", "<leader>sg", ":lua require'fzf-lua'.grep()<CR>", {})
+		vim.api.nvim_set_keymap("n", "<leader>ca", ":lua require'fzf-lua'.lsp_code_actions()<CR>", {})
+		vim.api.nvim_set_keymap("n", "fu", ":lua require'fzf-lua'.lsp_references()<CR>", {})
+		vim.api.nvim_set_keymap("n", "gd", ":lua require'fzf-lua'.lsp_definitions()<CR>", {})
 	end,
 }
