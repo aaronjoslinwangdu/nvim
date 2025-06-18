@@ -88,6 +88,9 @@ return {
 			})
 
 			lspconfig.astro.setup({
+				on_attach = function()
+					vim.cmd("let g:astro_typescript = 'enable'")
+				end,
 				capabilities = capabilities,
 				handlers = handlers,
 			})
