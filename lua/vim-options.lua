@@ -7,6 +7,7 @@ vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set number relativenumber")
 vim.cmd("set inccommand=split")
+vim.cmd(":tnoremap <Esc> <C-\\><C-n>")
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
