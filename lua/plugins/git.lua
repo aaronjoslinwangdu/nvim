@@ -2,7 +2,10 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
-			require("gitsigns").setup({
+      local gitsigns = require("gitsigns")
+      local map = vim.keymap.set
+
+			gitsigns.setup({
 				signs = {
 					add = { text = "+" },
 					change = { text = "~" },
@@ -11,15 +14,10 @@ return {
 					changedelete = { text = "~" },
 				},
 			})
-		end,
-	},
-	{
-		"tpope/vim-fugitive",
-		config = function()
-			vim.api.nvim_set_keymap("n", "<leader>gb", ":G blame<CR>", {})
-			vim.api.nvim_set_keymap("n", "<leader>gd", ":Gdiffsplit<CR>", {})
-			vim.api.nvim_set_keymap("n", "<leader>go", ":GBrowse<CR>", {})
-			vim.api.nvim_set_keymap("n", "<leader>gm", ":G mergetool<CR>", {})
+
+			map("n", "<leader>gb", gitsigns.blame)
+			map("n", "<leader>gd", gitsigns.diffthis)
+      map("n", "<leader>gh", gitsigns.preview_hunk_inline)
 		end,
 	},
 }
