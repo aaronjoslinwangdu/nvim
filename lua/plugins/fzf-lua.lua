@@ -2,8 +2,8 @@ return {
 	"ibhagwan/fzf-lua",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
-    local fzf = require("fzf-lua")
-    local map = vim.keymap.set
+		local fzf = require("fzf-lua")
+		local map = vim.keymap.set
 
 		fzf.setup({
 			oldfiles = {
@@ -19,12 +19,17 @@ return {
 					syntax_limit_b = 1024 * 100,
 				},
 			},
-      winopts = {
-        fullscreen = true,
-        preview = {
-          horizontal = "right:50%",
-        },
-      },
+			winopts = {
+				fullscreen = true,
+				preview = {
+					horizontal = "right:50%",
+				},
+			},
+			keymap = {
+				fzf = {
+					["ctrl-a"] = "select-all+accept",
+				},
+			},
 		})
 
 		-- use for code actions
@@ -34,7 +39,7 @@ return {
 		map("n", "<leader>sr", fzf.oldfiles)
 		map("n", "<leader>sb", fzf.buffers)
 		map("n", "<leader>sg", fzf.grep)
-    map("n", "<leader>ca", fzf.lsp_code_actions)
+		map("n", "<leader>ca", fzf.lsp_code_actions)
 		map("n", "fu", fzf.lsp_references)
 		map("n", "gd", fzf.lsp_definitions)
 	end,
