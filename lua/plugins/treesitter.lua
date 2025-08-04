@@ -27,4 +27,7 @@ return {
 	{
 		"virchau13/tree-sitter-astro",
 	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+	},
 }
